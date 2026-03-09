@@ -5,10 +5,9 @@
 # SortGdrive
 An automated Python script to neatly upload and sort files from local storage to Google Drive based on file extension.
 
-# What's inside
-in it there are several features, namely
-1. auto install rclone (for connection to google drive)
-2. automatic configuration
-3. automatic sorter
-4. sort files from the folder we want
-and many other features, you can see in this video
+# Key features
+1. Flexible code: can be used on any device (Android, Linux, max os, windows)
+2. Auto-Categorization: Sort files into custom folders (Documents, Images, Videos, etc.) in Google Drive.
+3. Cloud Integration: Connect directly using the Google Drive API or rclone.
+4. Customizable: Easily add new file extensions through a configuration file.
+
