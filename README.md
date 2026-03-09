@@ -3,7 +3,7 @@
 </p>
 
 # SortGdrive
-sortGdrive is a module that can help you in moving files to Google Drive neatly.
+An automated Python script to neatly upload and sort files from local storage to Google Drive based on file extension.
 
 # What's inside
 in it there are several features, namely
