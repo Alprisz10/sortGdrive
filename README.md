@@ -96,3 +96,23 @@ pip3 install -r requirements.txt
 python3 main.py
 
 ```
+<br>
+
+## ⚠️ Troubleshooting: "Externally Managed Environment" Error
+If you see a red error message while running pip install, your system is protecting the global Python environment. You **must** use a **Virtual Environment (venv)**:
+
+
+**For Linux / macOS / Android:**
+```Bash
+python3 -m venv venvsource venv/bin/activate
+pip install -r requirements.txt
+python main.py
+```
+
+**For Windows:**
+```PowerShell
+python -m venv venv
+.\venv\Scripts\activate
+pip install -r requirements.txt
+python main.py
+```
