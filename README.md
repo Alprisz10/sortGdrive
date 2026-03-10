@@ -9,9 +9,6 @@
   <a href="#">
     <img src="https://img.shields.io/badge/Platform-Windows%20%7C%20Linux%20%7C%20macOS%20%7C%20Android-lightgrey?style=for-the-badge" alt="Platform Support">
   </a>
-  <a href="https://github.com/Alprisz10/sortGdrive/blob/main/LICENSE">
-    <img src="https://img.shields.io/badge/License-MIT-green?style=for-the-badge" alt="License">
-  </a>
   <a href="https://github.com/Alprisz10/sortGdrive/issues">
     <img src="https://img.shields.io/github/issues/Alprisz10/sortGdrive?style=for-the-badge" alt="Open Issues">
   </a>
