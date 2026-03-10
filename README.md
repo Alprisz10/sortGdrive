@@ -39,10 +39,11 @@ It acts as a smart bridge between your device and the cloud, scanning a specifie
     - 🎬 Videos
     - 🎵 Audios
     - 💻 Applications
-*   **🔌 Powered by rclone:** Uses the reliable and fast `rclone` for cloud transfers with automatic installation if not present.
+*   **🔌 Powered by rclone:** Uses the reliable and fast `rclone` for cloud transfers with **automatic installation** if not present.
 *   **🔄 Automatic Remote Creation:** Script automatically creates and manages the `sortGdrive` remote for you.
 *   **📁 Flexible Input:** Choose between the default `Move_dir` folder or specify any custom directory on your device.
 *   **🛡️ Auto-Folder Creation:** Automatically creates all necessary folders in your Google Drive before uploading.
+*   **🇬🇧 English Interface:** Full English language menu and prompts for international users.
 
 ---
 
@@ -64,7 +65,7 @@ It acts as a smart bridge between your device and the cloud, scanning a specifie
 
 ---
 
-## 📂 Folder Structure
+## 📂 Project Structure
 
 ```
 sortGdrive/
@@ -75,7 +76,7 @@ sortGdrive/
 └── .gitignore           # Files to ignore in Git
 ```
 
-**Note:** Create the `Move_Dir` folder in the same directory as `main.py` before running the script.
+**Note:** Create the `Move_dir` folder in the same directory as `main.py` before running the script.
 
 ---
 
@@ -107,7 +108,7 @@ Choose the guide that matches your operating system.
     ```powershell
     git clone https://github.com/Alprisz10/sortGdrive
     cd sortGdrive
-    mkdir Move_Dir
+    mkdir Move_dir
     pip install -r requirements.txt
     python main.py
     ```
@@ -125,7 +126,7 @@ Open your Terminal (`Ctrl+Alt+T`) and run:
     ```bash
     git clone https://github.com/Alprisz10/sortGdrive
     cd sortGdrive
-    mkdir Move_Dir
+    mkdir Move_dir
     pip3 install -r requirements.txt
     python3 main.py
     ```
@@ -148,7 +149,7 @@ Open your Terminal (`Ctrl+Alt+T`) and run:
     ```bash
     git clone https://github.com/Alprisz10/sortGdrive
     cd sortGdrive
-    mkdir Move_Dir
+    mkdir Move_dir
     pip install -r requirements.txt
     python main.py
     ```
@@ -164,7 +165,7 @@ Open your Terminal (`Ctrl+Alt+T`) and run:
     ```bash
     git clone https://github.com/Alprisz10/sortGdrive
     cd sortGdrive
-    mkdir Move_Dir
+    mkdir Move_dir
     pip3 install -r requirements.txt
     python3 main.py
     ```
@@ -190,19 +191,19 @@ You'll be greeted with a menu:
 ᴍᴀᴅᴇ ʙʏ ɴᴀᴡᴀ ᴀʟsᴀᴘʀɪsᴇ (ᴀʟᴘʀɪsᴢ)
 ─────────────────────────────
 
-1. Konfigurasi ulang
-2. Sortir file dari folder bawaan
-3. Sortir file dari folder keinginan
-masukkan pilihan :
+1. Reconfigure
+2. Sort files from default folder
+3. Sort files from custom folder
+enter your choice :
 ```
 
 ### Menu Options:
 
 | Option | Description |
 |--------|-------------|
-| **1. Konfigurasi ulang** | Reset and reconfigure your Google Drive connection |
-| **2. Sortir file dari folder bawaan** | Sort files from the default `Move_Dir` folder |
-| **3. Sortir file dari folder keinginan** | Sort files from a custom folder path |
+| **1. Reconfigure** | Reset and reconfigure your Google Drive connection |
+| **2. Sort files from default folder** | Sort files from the default `Move_dir` folder |
+| **3. Sort files from custom folder** | Sort files from a custom folder path |
 
 ### For Custom Folder (Option 3):
 - Use `../` to navigate up from the script directory
@@ -254,9 +255,14 @@ pip install -r requirements.txt --upgrade
 ### Authentication Issues
 If you need to reconfigure your Google Drive connection:
 
-1.  Run the script and select option **1 (Konfigurasi ulang)**
+1.  Run the script and select option **1 (Reconfigure)**
 2.  Confirm with `y` to delete the existing remote
 3.  Follow the authentication prompts again
+
+### Folder Not Found Error
+If you see "Error: Folder 'Move_dir' not found":
+- Make sure you've created the `Move_dir` folder in the same directory as `main.py`
+- Or use option 3 to specify an existing folder
 
 ---
 
