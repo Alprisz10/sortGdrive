@@ -17,6 +17,15 @@ An automated Python script to neatly upload and sort files from local storage to
 3. Uploading: The process of moving files from the device to Google Drive
 
 ## How to install
+
+### linux
+1. update you packages
 ```bash
-sudo add-apt-repository ppa:ondrej/php
+sudo apt update && apt upgrade
 ```
+2. install python
+```bash
+sudo apt install python
+```
+
+
