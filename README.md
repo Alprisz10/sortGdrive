@@ -226,6 +226,26 @@ When you run the script for the first time, rclone will prompt you to authentica
 
 ## ⚠️ Troubleshooting
 
+
+### The "Externally Managed Environment" Error
+If you see a red error about an "externally managed environment" when running `pip install`, your system is protecting the global Python installation. You **must** use a **Virtual Environment (venv)**:
+
+**For Linux / macOS / Android:**
+```bash
+python3 -m venv venv
+source venv/bin/activate
+pip install -r requirements.txt
+python main.py
+```
+
+**For Windows (PowerShell):**
+```powershell
+python -m venv venv
+.\venv\Scripts\Activate.ps1
+pip install -r requirements.txt
+python main.py
+```
+
 ### Rclone Not Found
 The script automatically tries to install rclone. If it fails:
 
