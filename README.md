@@ -21,46 +21,82 @@
 
 # 📁 SortGdrive: The Neat Freak's Google Drive Uploader
 
-Tired of a messy cloud storage? **SortGdrive** is an intelligent, cross-platform Python script that automates the process of uploading and sorting your local files directly into neatly organized folders on Google Drive.
+Tired of a messy cloud storage? **SortGdrive** is an intelligent, cross-platform Python script that automates the process of uploading and sorting your local files directly into neatly organized folders on Google Drive using **rclone**.
 
-It acts as a smart bridge between your device and the cloud, scanning a specified folder and categorizing your files (like Images, Documents, Videos, and more) based on their extensions. No more manual folder creation or dragging and dropping!
+It acts as a smart bridge between your device and the cloud, scanning a specified folder and categorizing your files (like Photos, Videos, Documents, and more) based on their extensions. No more manual folder creation or dragging and dropping!
 
 ---
 
 ## ✨ Key Features
 
 *   **🌐 Truly Cross-Platform:** One codebase to rule them all. Works flawlessly on **Windows, Linux, macOS, and even Android (via Termux)**.
-*   **🤖 Intelligent Auto-Categorization:** Automatically sorts files into custom folders (e.g., `Images`, `Documents`, `Archives`) in your Google Drive.
-*   **🔌 Flexible Cloud Integration:** Supports direct connection via the robust **Google Drive API** or the powerful **`rclone`** tool for advanced syncing.
-*   **⚙️ Highly Customizable:** Define your own folder structures and file extension rules through a simple, human-readable configuration file.
-*   **🔒 Safe & Secure:** Uses official APIs and doesn't store your passwords. For the API method, you have full control over your credentials.
+*   **🤖 Intelligent Auto-Categorization:** Automatically sorts files into 8 custom folders in your Google Drive:
+    - 📄 Documents/Word_Processing
+    - 📊 Documents/Spreadsheets
+    - 📽️ Documents/Presentation
+    - 🗜️ Documents/Archives
+    - 🖼️ Photos
+    - 🎬 Videos
+    - 🎵 Audios
+    - 💻 Applications
+*   **🔌 Powered by rclone:** Uses the reliable and fast `rclone` for cloud transfers with automatic installation if not present.
+*   **🔄 Automatic Remote Creation:** Script automatically creates and manages the `sortGdrive` remote for you.
+*   **📁 Flexible Input:** Choose between the default `Move_dir` folder or specify any custom directory on your device.
+*   **🛡️ Auto-Folder Creation:** Automatically creates all necessary folders in your Google Drive before uploading.
 
 ---
 
 ## 🗺️ How It Works: The Workflow
 
-1.  **🔍 Scan:** The script begins by scanning the designated input source folder on your local device.
-2.  **🏷️ Filter & Categorize:** It identifies each file's extension (e.g., `.pdf`, `.jpg`, `.mp4`) and maps it to a predefined category folder (e.g., `Documents`, `Images`, `Videos`).
-3.  **☁️ Upload & Organize:** The files are then uploaded/moved to the corresponding, pre-created (or automatically created) folders within your Google Drive.
+1.  **🔍 Scan:** The script scans either the default `Move_dir` folder or a custom folder you specify.
+2.  **🏷️ Filter & Categorize:** It identifies each file's extension and maps it to one of 8 predefined categories.
+3.  **📂 Auto-Create Folders:** Before uploading, it ensures all destination folders exist in your Google Drive.
+4.  **☁️ Upload & Organize:** The files are then moved to their respective folders using `rclone`.
 
 ```
 [Your Device Folder] --> [SortGdrive] --> [Google Drive]
      (Scan)              (Categorize)        (Organized)
-          └── .pdf ──────────┐
-          └── .jpg ─────┐    └──> 📁 Documents
-          └── .mp4 ──┐  └────────> 📁 Images
-                     └───────────> 📁 Videos
+          └── .docx ────────┐
+          └── .jpg ─────┐   └──> 📁 Documents/Word_Processing
+          └── .mp4 ──┐  └───────> 📁 Photos
+                     └──────────> 📁 Videos
 ```
+
+---
+
+## 📂 Folder Structure
+
+```
+sortGdrive/
+├── Move_Dir/            # Default directory for file sorting (create this folder)
+├── main.py              # Main script to run
+├── requirements.txt     # Python dependencies
+├── README.md            # This file
+└── .gitignore           # Files to ignore in Git
+```
+
+**Note:** Create the `Move_Dir` folder in the same directory as `main.py` before running the script.
+
+---
+
+## 🗂️ File Categorization Rules
+
+| Category | Folder in Google Drive | File Extensions |
+|----------|------------------------|-----------------|
+| **Word Processing** | `Documents/Word_Processing` | .docx, .doc, .pdf, .odt, .rtf, .txt |
+| **Spreadsheets** | `Documents/Spreadsheets` | .xlsx, .xls, .csv, .ods |
+| **Presentations** | `Documents/Presentation` | .pptx, .ppt, .odp |
+| **Archives** | `Documents/Archives` | .7z, .zip, .tar, .tar.bz2, .tar.gz, .tar.xz, .tar.lz4, .tar.zstd, .rar, .zipx |
+| **Photos** | `Photos` | .jpg, .jpeg, .png, .webp, .raw, .tiff, .psd, .heic, .heif, .gif, .svg |
+| **Videos** | `Videos` | .mp4, .mov, .mkv, .webm, .flv, .avi, .wmv |
+| **Audios** | `Audios` | .mp3, .aac, .m4a, .wav, .flac, .ogg, .mid, .midi, .wma |
+| **Applications** | `Applications` | .msi, .app, .dmg, .deb, .rpm, .bin, .run, .appimage, .ipa, .xapk, .aab, .iso, .nspro, .xci, .vpk |
 
 ---
 
 ## 🚀 Step-by-Step Installation & Setup
 
 Choose the guide that matches your operating system.
-
-### 📋 Prerequisites
-*   A **Google Cloud Platform (GCP) Project** with the Drive API enabled.
-*   A downloaded `credentials.json` file from your GCP project. ([See Google's Guide](https://developers.google.com/drive/api/quickstart/python))
 
 ### 🪟 1. Windows Users
 
@@ -71,6 +107,7 @@ Choose the guide that matches your operating system.
     ```powershell
     git clone https://github.com/Alprisz10/sortGdrive
     cd sortGdrive
+    mkdir Move_Dir
     pip install -r requirements.txt
     python main.py
     ```
@@ -82,12 +119,13 @@ Open your Terminal (`Ctrl+Alt+T`) and run:
 1.  **Update & Install Tools:**
     ```bash
     sudo apt update && sudo apt upgrade -y
-    sudo apt install git python3 python3-pip python3-venv -y
+    sudo apt install git python3 python3-pip -y
     ```
 2.  **Clone & Run:**
     ```bash
     git clone https://github.com/Alprisz10/sortGdrive
     cd sortGdrive
+    mkdir Move_Dir
     pip3 install -r requirements.txt
     python3 main.py
     ```
@@ -110,6 +148,7 @@ Open your Terminal (`Ctrl+Alt+T`) and run:
     ```bash
     git clone https://github.com/Alprisz10/sortGdrive
     cd sortGdrive
+    mkdir Move_Dir
     pip install -r requirements.txt
     python main.py
     ```
@@ -125,59 +164,99 @@ Open your Terminal (`Ctrl+Alt+T`) and run:
     ```bash
     git clone https://github.com/Alprisz10/sortGdrive
     cd sortGdrive
+    mkdir Move_Dir
     pip3 install -r requirements.txt
     python3 main.py
     ```
+
 ---
 
-## ⚠️ Troubleshooting & Tips
+## 📖 How to Use
 
-### The "Externally Managed Environment" Error
-If you see a red error about an "externally managed environment" when running `pip install`, your system is protecting the global Python installation. You **must** use a **Virtual Environment (venv)**:
+After installation, run the script:
 
-**For Linux / macOS / Android:**
 ```bash
-python3 -m venv venv
-source venv/bin/activate
-pip install -r requirements.txt
-python main.py
+python main.py   # or python3 main.py on Linux/macOS
 ```
 
-**For Windows (PowerShell):**
+You'll be greeted with a menu:
+
+```
+╔══╗╔═╗╔═╗╔══╗  ╔══╗╔══╗╔═╗╔══╗╔╗─╔╗╔═╗
+║══╣║║║║╬║╚╗╔╝  ║╔═╣╚╗╗║║╬║╚║║╝║╚╦╝║║╦╝
+╠══║║║║║╗╣─║║─  ║╚╗║╔╩╝║║╗╣╔║║╗╚╗║╔╝║╩╗
+╚══╝╚═╝╚╩╝─╚╝─  ╚══╝╚══╝╚╩╝╚══╝─╚═╝─╚═╝
+──────────────  ───────────────────────
+ᴍᴀᴅᴇ ʙʏ ɴᴀᴡᴀ ᴀʟsᴀᴘʀɪsᴇ (ᴀʟᴘʀɪsᴢ)
+─────────────────────────────
+
+1. Konfigurasi ulang
+2. Sortir file dari folder bawaan
+3. Sortir file dari folder keinginan
+masukkan pilihan :
+```
+
+### Menu Options:
+
+| Option | Description |
+|--------|-------------|
+| **1. Konfigurasi ulang** | Reset and reconfigure your Google Drive connection |
+| **2. Sortir file dari folder bawaan** | Sort files from the default `Move_Dir` folder |
+| **3. Sortir file dari folder keinginan** | Sort files from a custom folder path |
+
+### For Custom Folder (Option 3):
+- Use `../` to navigate up from the script directory
+- Example: `../../downloads/browsers`
+- Or use absolute paths: `~/storage/downloads/browsers` (especially useful on Android/Termux)
+
+---
+
+## 🔧 First Run: Google Drive Authentication
+
+When you run the script for the first time, rclone will prompt you to authenticate with Google Drive:
+
+1.  The script will automatically create a remote named `sortGdrive`
+2.  You'll see a URL to visit in your browser
+3.  Log in to your Google account and grant permissions
+4.  Copy the verification code and paste it back in the terminal
+5.  Authentication is saved for future use
+
+---
+
+## ⚠️ Troubleshooting
+
+### Rclone Not Found
+The script automatically tries to install rclone. If it fails:
+
+**Windows:** 
 ```powershell
-python -m venv venv
-.\venv\Scripts\Activate.ps1
-pip install -r requirements.txt
-python main.py
+winget install Rclone.Rclone
 ```
 
-### Using rclone as an Alternative
-1.  Install `rclone` from [rclone.org](https://rclone.org/).
-2.  Configure `rclone` to connect to your Google Drive (`rclone config`).
-3.  Set `upload_method: "rclone"` in your `config.yaml`.
-4.  Add your `rclone_remote_name: "your-remote-name"` to the config.
-
----
-
-## 📁 Project Structure
-
-```
-sortGdrive/
-├── Move_Dir             # default directory for file sorting container
-├── main.py              # Main script to run
-├── requirements.txt     # Python dependencies
-├── README.md            # This file
-└──  .gitignore           # Files to ignore in Git
+**Linux/Android:**
+```bash
+sudo apt install rclone          # Ubuntu/Debian
+pkg install rclone                # Termux
 ```
 
----
+**macOS:**
+```bash
+brew install rclone
+```
 
-## 🛣️ Roadmap / Future Ideas
+### Module Not Found Errors
+If you see Python module errors, ensure all dependencies are installed:
 
-- [ ] Add support for recursive folder scanning.
-- [ ] Implement a GUI for easier configuration.
-- [ ] Create a dry-run mode to preview changes without uploading.
-- [ ] Add support for other cloud providers (Dropbox, OneDrive).
+```bash
+pip install -r requirements.txt --upgrade
+```
+
+### Authentication Issues
+If you need to reconfigure your Google Drive connection:
+
+1.  Run the script and select option **1 (Konfigurasi ulang)**
+2.  Confirm with `y` to delete the existing remote
+3.  Follow the authentication prompts again
 
 ---
 
@@ -202,6 +281,13 @@ Distributed under the MIT License. See `LICENSE` file for more information.
 ## 📬 Contact
 
 Project Link: [https://github.com/Alprisz10/sortGdrive](https://github.com/Alprisz10/sortGdrive)
+
+---
+
+## 🙏 Credits
+
+- **Nawa Alsaprise (Alprisz)** - Creator and Developer
+- **rclone** - Excellent cloud sync tool ([https://rclone.org/](https://rclone.org/))
 
 ---
 
