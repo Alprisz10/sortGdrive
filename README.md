@@ -16,15 +16,7 @@ An automated Python script to neatly upload and sort files from local storage to
 2. Filtering: Files are grouped by extension (eg: .jpg to Images folder).
 3. Uploading: The process of moving files from the device to Google Drive
 
-## How to install
-# 🚀 GDrive Auto-Sorter
-
-An automated Python script to organize your local files and sort them neatly into specific folders on Google Drive using the Google Drive API.
-
----
-
-## 🛠️ Step-by-Step Installation (For Beginners)
-
+## 🛠️ Step-by-Step Installation
 Choose the guide below based on the device you are using.
 
 ### 🪟 1. Windows Users
@@ -38,8 +30,9 @@ Choose the guide below based on the device you are using.
    cd sortGdrive
    pip install -r requirements.txt
    python main.py
+<br>
 
-### 2. Linux Users (Ubuntu/Debian/Lubuntu)
+### 🐧 2. Linux Users (Ubuntu/Debian/Lubuntu)
 Open your Terminal (Ctrl+Alt+T) and run these commands one by one:
 
 1. **Update & Install Tools:**
@@ -54,8 +47,52 @@ cd sortGdrive
 pip3 install -r requirements.txt
 python3 main.py
 ```
+<br>
 
-### 3. Android Users (Via Termux)
+### 🤖 3. Android Users (Via Termux)
 Please install Termux from F-Droid (not the Play Store version).
 
+1. **Grant Storage Access:**
+```Bash
+termux-setup-storage
+```
+(Click "Allow" when the pop-up appears on your phone screen)
+2. **Update & Install Packages:**
+```Bash
+pkg update && pkg upgrade -y
+pkg install git python -y
+```
+3. **Clone & Run:**
+```Bash
+git clone [https://github.com/Alprisz10/sortGdrive](https://github.com/Alprisz10/sortGdrive)
+cd sortGdrive
+pip install -r requirements.txt
+python main.py
+```
+<br>
 
+### 🍎 4. macOS Users
+
+1.**Install Homebrew**  (if not already installed):
+
+Visit brew.sh and follow the instructions.
+
+2. **Install Python & Git:**
+
+```Bash
+
+brew install python git
+
+```
+
+3. **Clone & Run:**
+
+```Bash
+
+git clone [https://github.com/Alprisz10/sortGdrive](https://github.com/Alprisz10/sortGdrive)cd sortGdrive
+
+pip3 install -r requirements.txt
+
+python3 main.py
+
+```
